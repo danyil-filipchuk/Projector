@@ -14,16 +14,22 @@ console.log(a % b);
 
 // task 2
 
-let info1 = 5;
-info1 = 'Projector';
+const info = '5';
 
-console.log(info1);
+console.log(Number(info));
+console.log(Boolean(info));
 
-let info2 = 'Institute';
-info2 = 10;
+const info2 = 0;
 
-console.log(info2);
+console.log(String(info2));
+console.log(Boolean(info2));
 
-const number = 5;
+const info3 = true;
 
-console.log(Boolean(number));
+console.log(String(info3));
+console.log(Number(info3));
+
+const info4 = false;
+
+console.log(Number(info4));
+
