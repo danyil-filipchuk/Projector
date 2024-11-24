@@ -16,29 +16,30 @@ for (let i = 1; i <= 100; i++) {
 
 // task 2 (part 1):
 
-let value = 1;
+let value = 10;
 
-if((typeof value !== "number") || (isNaN(value))){
+if((typeof value !== "number") || (isNaN(value))) {
     console.log('Таке чуство шо Бог десь наказує нас за шось');
 } else {
-    for (; value < 10; value++) {
-        if (value % 2 === 0) {
-            console.log(value);
+    for (let i = 1; i < value; i++) {
+        if (i % 2 === 0) {
+            console.log(i++);
         }
     }
 }
 
 // task 2 (part 2):
 
-let value = 1;
+let i = 1;
+let value = 10;
 
 if((typeof value !== "number") || (isNaN(value))) {
     console.log('Таке чуство шо Бог десь наказує нас за шось');
 } else {
-    while (value < 10) {
-        if (value % 2 === 0) {
-            console.log(value);
+    while (i < value) {
+        if (i % 2 === 0) {
+            console.log(i);
         }
-        value++
+        i++;
     }
 }
