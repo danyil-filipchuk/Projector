@@ -32,4 +32,3 @@ console.log(Number(info3));
 const info4 = false;
 
 console.log(Number(info4));
-
