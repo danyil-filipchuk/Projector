@@ -1,4 +1,4 @@
-'use string';
+'use strict';
 
 // task 1:
 
@@ -6,7 +6,7 @@ function iterativeOddSumTo(number) {
 
     let result = 0;
 
-    for (i = 1; i <= number; i++) {
+    for (let i = 1; i <= number; i++) {
         if (i % 2 !== 0) {
             result +=i;
         }
