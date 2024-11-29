@@ -5,9 +5,7 @@
 const userNames = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
 
 let filteredNames = userNames.filter( item => {
-    if(['А','Е','И','І','Ї','О','У','Ю','Я','Є'].includes(item[0])) {
-        return true;
-    }
+    return ['А','Е','И','І','Ї','О','У','Ю','Я','Є'].includes(item[0]);
 })
 
 console.log(filteredNames);
@@ -27,14 +25,12 @@ console.log(filteredNames);
 
 // task 3 (first option):
 
-const currentMaxValue = 4589;
+function currentMaxValue(reverseMaxValue){
+    reverseMaxValue = reverseMaxValue + "";
+    return reverseMaxValue.split("").reverse().join("");
+}
 
-const arr = Array.from(String(currentMaxValue), Number);
-const rev = arr.reverse();
-const str = rev.join('')
-let reverseMaxValue = Number(str);
-
-console.log(reverseMaxValue); // 9854
+console.log(currentMaxValue(4589)); // 9854
 console.log(typeof reverseMaxValue); // 'number'
 
 // task 3 (second option):
@@ -47,10 +43,8 @@ console.log(reverseNumber(4589));
 
 const resultsArray = [1, 2, [3, [4]]];
 
-const resultsArray2 = resultsArray.flat(Infinity);
-
-let productOfArray = resultsArray2.reduce((accum, item) => {
-     return accum * item
+let productOfArray = resultsArray.flat(Infinity).reduce((accum, item) => {
+    return accum * item
 })
 
 console.log(productOfArray); // 24
@@ -58,3 +52,5 @@ console.log(productOfArray); // 24
 // or: let productOfArray = resultsArray2.reduce(function(accum, item) {
 //     return accum * item
 // })
+
+
