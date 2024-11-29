@@ -1,5 +1,19 @@
 'use strict';
 
+// task 1:
+
+const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
+
+let initials = userNames.sort().map(item => {
+
+    const letter = item.split(' ');
+
+    return letter.map(name => name[0]).join('.') + '.';
+
+})
+
+console.log(initials); // [ "Г.П.А.", "П.О.І.", "Р.А.О."]
+
 // task 2 (first option):
 
 const userNames = ['Петро', 'Емма', 'Юстин', 'Ілля', 'Марта', 'Яна', 'Василь', 'Антон', 'Олена'];
@@ -8,7 +22,7 @@ let filteredNames = userNames.filter( item => {
     return ['А','Е','И','І','Ї','О','У','Ю','Я','Є'].includes(item[0]);
 })
 
-console.log(filteredNames);
+console.log(filteredNames); // ['Емма', 'Юстин', 'Ілля', 'Яна', 'Антон', 'Олена']
 
 // task 2 (second option):
 
@@ -21,11 +35,13 @@ for(let i = 0; i < userNames.length; i++) {
         filteredNames.push(arr);
     }
 }
-console.log(filteredNames);
+
+console.log(filteredNames); // ['Емма', 'Юстин', 'Ілля', 'Яна', 'Антон', 'Олена']
 
 // task 3 (first option):
 
 function currentMaxValue(reverseMaxValue){
+
     reverseMaxValue = reverseMaxValue + "";
     return reverseMaxValue.split("").reverse().join("");
 }
@@ -52,5 +68,3 @@ console.log(productOfArray); // 24
 // or: let productOfArray = resultsArray2.reduce(function(accum, item) {
 //     return accum * item
 // })
-
-
