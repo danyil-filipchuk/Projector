@@ -2,19 +2,39 @@
 
 // task 1:
 
-function durationBetweenDates(a,b,c) {
+function durationBetweenDates(
+    startDate = '29 Mar 2001',
+    endDate = '30 Mar 2001',
+    indicator = 'hours'
+) {
 
-    const a2 = new Date(a);
-    const b2 = new Date(b);
+    const start = new Date(startDate);
+    const end = new Date(endDate);
 
-    if (c === 'seconds') console.log((Math.abs((a2 - b2) / 1000)).toString());
-    if (c === 'minutes') console.log((Math.abs(a2 - b2) / (1000*60)).toString());
-    if (c === 'hours') console.log((Math.abs(a2 - b2) / (1000*60*60)).toString());
-    if (c === 'days') console.log((Math.abs(a2 - b2) / (1000*60*60*24)).toString());
+    const difference = Math.abs(end - start);
+
+    const seconds = 1000;
+    const minutes = 1000 * 60;
+    const hours = 1000 * 60 * 60;
+    const days = 1000 * 60 * 60 * 24;
+
+    if (indicator === 'seconds') {
+        return ((difference / seconds).toString() + ' seconds');
+    }
+    if (indicator === 'minutes') {
+        return ((difference / minutes).toString() + ' minutes');
+    }
+    if (indicator === 'hours') {
+        return ((difference / hours).toString() + ' hours');
+    }
+    if (indicator === 'days') {
+        return ((difference / days).toString() + ' days');
+    }
 }
 
-durationBetweenDates('02 Aug 1985', '03 Aug 1985', 'seconds')  // поверне '86400 seconds'
-durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days')  // поверне '362 days'
+console.log(durationBetweenDates('02 Aug 1985', '03 Aug 1985', 'seconds'))  // поверне '86400 seconds'
+console.log(durationBetweenDates('31 Jan 2022', '03 Feb 2021', 'days'))  // поверне '362 days'
+console.log(durationBetweenDates());
 
 // task 2:
 
@@ -27,12 +47,8 @@ const priceData = {
 function optimizer(data) {
 
     for (let key in data) {
-        data[key.toLowerCase()] = data[key];
+        data[key.toLowerCase()] = Number(data[key]).toFixed(2);
         delete data[key];
-    }
-
-    for (let item in data) {
-        data[item] = Number(data[item]).toFixed(2);
     }
 
     return data;
@@ -42,6 +58,5 @@ function optimizer(data) {
 let updatedPriceData = optimizer(priceData);
 
 console.log(updatedPriceData) // {apples: '23.40', bananas: '48.00', oranges: '48.76'}
-
 
 
