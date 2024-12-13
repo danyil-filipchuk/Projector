@@ -17,7 +17,7 @@ console.log(addThemAll(5,5,10)); // 20
 // task 2:
 
 function multiply(a) {
-    return function calculate(b) {
+    return function multiply(b) {
         return a * b;
     }
 }
