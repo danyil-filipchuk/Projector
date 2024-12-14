@@ -4,10 +4,9 @@
 
 function addThemAll (...arr) {
 
-    const sum = arr.reduce((accum, item) => {
+    return arr.reduce((accum, item) => {
         return accum + item;
     })
-    return sum;
 }
 
 console.log(addThemAll(2,4)); // 6
@@ -57,20 +56,26 @@ const movies = [
 
 function byProperty(property, direction) {
 
-    return (a,b) => {
-        if ((direction === '>') && (a[property] > b[property])) {
-            return 1
-        }
-        else if ((direction === '>') && (a[property] < b[property])) {
-            return -1
-        }
-        else if ((direction === '<') && (a[property] < b[property])) {
-            return 1
-        }
-        else if ((direction === '<') && (a[property] > b[property])) {
-            return -1
+    if (direction === '>') {
+        return (a, b) => {
+            if (a[property] > b[property]) {
+                return 1
+            } else if (a[property] < b[property]) {
+                return -1
+            }
         }
     }
+
+    if (direction === '<') {
+        return (a, b) => {
+            if (a[property] > b[property]) {
+                return -1
+            } else if (a[property] < b[property]) {
+                return 1
+            }
+        }
+    }
+
 }
 
 console.log(movies.sort(byProperty('releaseYear', '>')));
