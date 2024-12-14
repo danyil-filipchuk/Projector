@@ -4,6 +4,8 @@
 
 function detonatorTimer(delay) {
 
+    const oneSecond = 1000;
+
     const interval = setInterval(() => {
         if (delay > 0) {
             console.log(delay--);
@@ -11,7 +13,7 @@ function detonatorTimer(delay) {
             console.log('BOOM!');
             clearInterval(interval);
         }
-    }, 1000);
+    }, oneSecond);
 }
 
 detonatorTimer(3);
@@ -24,6 +26,8 @@ detonatorTimer(3);
 
 function detonatorTimer(delay) {
 
+    const oneSecond = 1000;
+
     setTimeout(() => {
         if (delay === 0) {
             console.log('BOOM!');
@@ -31,7 +35,7 @@ function detonatorTimer(delay) {
             console.log(delay)
             detonatorTimer(delay - 1)
         }
-    }, 1000);
+    }, oneSecond);
 }
 
 detonatorTimer(3);
@@ -42,7 +46,7 @@ detonatorTimer(3);
 
 // task 3 and 4:
 
-let aboutMe = {
+let aboutMe = Object.freeze({
     name: 'Danya',
     city: 'Kyiv',
     gender: 'male',
@@ -59,11 +63,11 @@ let aboutMe = {
     describeMyMood(){
         console.log(`I almost always ${this.defaultMood}, but now I'm ${this.currentMood}`);
     }
-}
+})
 
-let securedSelfIntroduce = Object.freeze(aboutMe).introduce.bind(aboutMe);
-let securedSelfPrediction = Object.freeze(aboutMe).prediction.bind(aboutMe);
-let securedSelfDescribeMyMood = Object.freeze(aboutMe).describeMyMood.bind(aboutMe);
+const securedSelfIntroduce = aboutMe.introduce.bind(aboutMe);
+const securedSelfPrediction = aboutMe.prediction.bind(aboutMe);
+const securedSelfDescribeMyMood = aboutMe.describeMyMood.bind(aboutMe);
 
 setTimeout(securedSelfIntroduce, 1000); // виведе коректний результат
 setTimeout(securedSelfPrediction, 2000); // виведе коректний результат
