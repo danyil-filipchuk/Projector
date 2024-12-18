@@ -36,5 +36,3 @@ document.addEventListener('DOMContentLoaded', () => {
         createSingleTaskElement(task);
     })
 })
-
-Info
