@@ -29,4 +29,3 @@ console.log(ulWithLi[4]);
 const ulWithLi = document.querySelectorAll('ul > li')
 
 console.log(ulWithLi[4]);
-
