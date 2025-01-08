@@ -13,11 +13,11 @@
 <body>
 <div class="container">
     <div class="todo-container">
-        <h1>ToDoList</h1>
+        <h1 style="font-family: sans-serif">ToDoList</h1>
 
         <div class="create-task-block">
             <form class="create-task-form">
-                <h3 class="task-title">Нове завдання</h3>
+                <h3 class="task-title" style="font-size: 25px; font-family: cursive">Нове завдання</h3>
                 <div class="input-field">
                     <label>
                         <input type="text" name="task" class="task-input" placeholder="Ввести завдання">
@@ -29,14 +29,16 @@
 
 
         <div class="filter-task-block">
-            <h3 class="task-title">Список завдань</h3>
+            <h3 class="task-title" style="font-size: 25px; font-family: cursive">Список завдань</h3>
             <div class="input-field">
+            </div>
+            <ul class="collection"></ul>
+            <div class="bottom-windows">
                 <label>
                     <input type="text" name="filter" class="filter-input" placeholder="Пошук завдань">
                 </label>
+                <button class="clear-tasks">Видалити всі завдання</button>
             </div>
-            <ul class="collection"></ul>
-            <button class="clear-tasks">Видалити всі завдання</button>
         </div>
     </div>
 </div>

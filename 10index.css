@@ -15,43 +15,79 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: cornsilk;
+    background-color: darkgray;
 }
 
 .todo-container {
-    width: 60%;
-    height: 70%;
+    width: 30%;
+    height: 80%;
     background-color: aliceblue;
     border-radius: 20px;
     text-align: center;
 }
 
-.btn {
-    margin-top: 16px;
+.task-title {
+    margin: 16px 0 16px 0;
+}
+
+.create-task-block {
+    margin: 0 8px 0 8px;
+    border: 2px solid #3498db;
+    border-radius: 12px;
+}
+
+.filter-task-block {
+    margin: 0 8px 0 8px;
+    border: 2px solid #3498db;
+    border-radius: 12px;
+}
+
+.input-field {
+    margin-bottom: 12px;
 }
 
 .collection {
     padding: 0;
 }
 
-.delete-task {
+.done-task {
     margin-left: 10px;
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    background-color: red;
-    color: whitesmoke;
+    background-color: forestgreen;
+    color: white;
+    font-size: 15px;
 }
 
 .edit-task {
     margin-left: 10px;
-    border: none;
     cursor: pointer;
-    border-radius: 4px;
-    background-color: lightgrey;
-    color: black;
+    background-color: honeydew;
+    border-radius: 5px;
 }
 
 .item-task {
     margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.filter-task-block {
+    margin-top: 50px;
+}
+
+.filter-input {
+    width: 160px;
+    height: 20px;
+    padding: 0;
+}
+
+.clear-tasks {
+    width: 160px;
+    height: 20px;
+    margin-top: 20px;
+}
+
+.bottom-windows {
+    margin-bottom: 12px;
 }

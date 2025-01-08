@@ -20,19 +20,18 @@ function createSingleTaskElement(taskInput) {
     li.appendChild(document.createTextNode(taskInput));
     li.classList.add('item-task');
 
-    const deleteTask = document.createElement('button');
-    deleteTask.textContent = 'Видалити';
-    deleteTask.classList.add('delete-task');
+    const doneTask = document.createElement('button');
+    doneTask.textContent = 'Виконано';
+    doneTask.classList.add('done-task');
 
-    const editTask = document.createElement('button');
-    editTask.textContent = 'Змінити';
-    editTask.classList.add('edit-task');
+    const editTask = document.createElement('i');
+    editTask.classList.add('fa', 'fa-edit', 'edit-task', 'fa-lg');
 
-    li.appendChild(deleteTask);
+    li.appendChild(doneTask);
     li.appendChild(editTask);
     tasksList.appendChild(li);
 
-    deleteTask.addEventListener('click', () => {
+    doneTask.addEventListener('click', () => {
         li.remove();
     })
 }
