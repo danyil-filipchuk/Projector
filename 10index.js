@@ -42,6 +42,7 @@ function storeTaskInLocalStorage(task) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const tasks = localStorage.getItem('tasks') !== null
         ? JSON.parse(localStorage.getItem('tasks'))
