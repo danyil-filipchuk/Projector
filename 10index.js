@@ -10,15 +10,26 @@ form.addEventListener('submit', (event) => {
     if (taskInput.value.trim() === '') {
         return;
     }
-    createSingleTaskElement(taskInput.value);
-    storeTaskInLocalStorage(taskInput.value);
+
+    const task = {
+        id: generateId(),
+        text: taskInput.value.trim(),
+    }
+
+    createSingleTaskElement(task);
+    storeTaskInLocalStorage(task);
     taskInput.value = '';
 })
 
+function generateId() {
+    return Date.now();
+}
+
 function createSingleTaskElement(taskInput) {
     const li = document.createElement('li');
-    li.appendChild(document.createTextNode(taskInput));
+    li.appendChild(document.createTextNode(taskInput.text));
     li.classList.add('item-task');
+    li.setAttribute('data-id', taskInput.id);
 
     const doneTask = document.createElement('button');
     doneTask.textContent = 'Виконано';
@@ -32,23 +43,44 @@ function createSingleTaskElement(taskInput) {
     tasksList.appendChild(li);
 
     doneTask.addEventListener('click', () => {
+        removeFromLocalStorage(taskInput.id);
         li.remove();
+    })
+
+    editTask.addEventListener('click', () => {
+        const newText = prompt('Виправіть текст завдання', taskInput.text);
+        if (newText && newText.trim() !== '') {
+            taskInput.text = newText.trim();
+            li.firstChild.textContent = taskInput.text;
+        }
     })
 }
 
 function storeTaskInLocalStorage(task) {
-    const tasks = localStorage.getItem('tasks') !== null ? JSON.parse(localStorage.getItem('tasks')) : [];
+    const tasks = localStorage.getItem('tasks') !== null
+        ? JSON.parse(localStorage.getItem('tasks')) : [];
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+function removeFromLocalStorage(taskId) {
+    const tasks = localStorage.getItem('tasks') !== null
+    ? JSON.parse(localStorage.getItem('tasks')) : [];
+
+    const filterTasks = tasks.filter(task => task.id !== taskId);
+    localStorage.setItem('tasks', JSON.stringify(filterTasks));
+}
+
+clearBtn.addEventListener('click', () => {
+    tasksList.innerHTML = '';
+    localStorage.removeItem('tasks');
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const tasks = localStorage.getItem('tasks') !== null
-        ? JSON.parse(localStorage.getItem('tasks'))
-        : [];
+        ? JSON.parse(localStorage.getItem('tasks')) : [];
 
     tasks.forEach((task) => {
         createSingleTaskElement(task);
     })
-})
+});
