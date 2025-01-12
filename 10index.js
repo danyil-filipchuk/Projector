@@ -24,7 +24,7 @@ form.addEventListener('submit', (event) => {
 
 // Функція генерації унікального айді нашим елементам.
 function generateId() {
-    return Date.now();
+    return crypto.randomUUID();
 }
 
 function createSingleTaskElement(taskInput) {
