@@ -13,7 +13,7 @@ form.addEventListener('submit', (event) => {
 
     // Створення змінної-об'єкта з двома ключами - айді та самим текстом.
     const task = {
-        id: generateId(),
+        id: crypto.randomUUID(),
         text: taskInput.value.trim(),
     }
 
@@ -21,11 +21,6 @@ form.addEventListener('submit', (event) => {
     storeTaskInLocalStorage(task);
     taskInput.value = '';
 })
-
-// Функція генерації унікального айді нашим елементам.
-function generateId() {
-    return crypto.randomUUID();
-}
 
 function createSingleTaskElement(taskInput) {
     const li = document.createElement('li');
