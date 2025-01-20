@@ -1,29 +1,28 @@
 'use strict';
 
-const buttonStatus = {
-    isOn: true,
-    lastActionTime: ''
-}
-
 // Функція, яка відповідає за збереження станів змінних в localStorage
-function saveState(isOn, lastActionTime) {
-    localStorage.setItem('isOn', isOn);
+function saveState(status, lastActionTime) {
+    localStorage.setItem('Status', status);
     localStorage.setItem('lastActionTime', lastActionTime);
 }
 
 // Функція, яка завантажує стани змінних із localStorage, якщо вони там присутні.
 // Якщо localStorage пустий, то змінні isOn та lastActionTime залишаються без змін.
-function loadState(state) {
+function loadState() {
+    let savedIsOn = localStorage.getItem('Status');
+    let savedLastActionTime = localStorage.getItem('lastActionTime');
 
-    const savedIsOn = localStorage.getItem('isOn');
-    const savedLastActionTime = localStorage.getItem('lastActionTime');
+    if (!savedIsOn) {
+        savedIsOn = 'isOn';
+    }
+    if (!savedLastActionTime) {
+        savedLastActionTime = '';
+    }
 
-    if (savedIsOn === 'false') {
-        state.isOn = false;
-    }
-    if (savedLastActionTime) {
-        state.lastActionTime = savedLastActionTime;
-    }
+    return {
+        status: savedIsOn,
+        lastActionTime: savedLastActionTime
+    };
 }
 
 // Функція яка відображає повідомлення за допомогою додавання та видалення потрібного класу.
@@ -39,19 +38,20 @@ document.addEventListener('DOMContentLoaded', function () {
     const button = document.getElementById('buttonSwitch');
     const notification = document.getElementById('notification');
 
-    loadState(buttonStatus);
+    let buttonInfo = loadState();
+
     // При завантаженні сторінки, змінюємо колір та текст залежно від значення змінної isOn
-    if (buttonStatus.isOn === true) {
-        bodyElement.style.backgroundColor = 'orange'
-        button.textContent = 'Turn Off'
-        notification.textContent = `Last turn on: ${buttonStatus.lastActionTime}`
-    } else {
-        bodyElement.style.backgroundColor = 'gray'
-        button.textContent = 'Turn On'
-        notification.textContent = `Last turn off: ${buttonStatus.lastActionTime}`
+    if (buttonInfo.status === 'isOn') {
+        bodyElement.style.backgroundColor = 'orange';
+        button.textContent = 'Turn Off';
+        notification.textContent = `Last turn on: ${buttonInfo.lastActionTime}`;
+    } else if (buttonInfo.status === 'isOff') {
+        bodyElement.style.backgroundColor = 'gray';
+        button.textContent = 'Turn On';
+        notification.textContent = `Last turn off: ${buttonInfo.lastActionTime}`;
     }
     // При завантаженні сторінки, відображаємо повідомлення, якщо lastActionTime має не пустий рядок в середині
-    if (buttonStatus.lastActionTime) {
+    if (buttonInfo.lastActionTime) {
         displayNotification(notification);
     }
     // КОД ЗВЕРХУ ВИКОНУЄТЬСЯ ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ
@@ -59,22 +59,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Під час кліку на кнопку виконується наступний код
     button.addEventListener('click', function () {
-        buttonStatus.isOn = !buttonStatus.isOn;
         const currentTime = new Date().toLocaleString('uk');
 
-        if (buttonStatus.isOn === true) {
-            bodyElement.style.backgroundColor = 'orange'
-            button.textContent = 'Turn Off'
-            notification.textContent = `Last turn on: ${currentTime}`
-        } else {
-            bodyElement.style.backgroundColor = 'gray'
-            button.textContent = 'Turn On'
-            notification.textContent = `Last turn off: ${currentTime}`
+        if (buttonInfo.status === 'isOn') {
+            buttonInfo.status = 'isOff';
+            bodyElement.style.backgroundColor = 'gray';
+            button.textContent = 'Turn On';
+            notification.textContent = `Last turn off: ${currentTime}`;
+        } else if (buttonInfo.status === 'isOff') {
+            buttonInfo.status = 'isOn';
+            bodyElement.style.backgroundColor = 'orange';
+            button.textContent = 'Turn Off';
+            notification.textContent = `Last turn on: ${currentTime}`;
         }
         // В кінці коду який виконується під час кліку, відображаємо повідомлення і зберігаємо стан змінних в localStorage
         displayNotification(notification);
-        saveState(buttonStatus.isOn, currentTime);
+        saveState(buttonInfo.status, currentTime);
     });
 
 })
-
