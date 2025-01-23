@@ -9,15 +9,8 @@ function saveState(status, lastActionTime) {
 // Функція, яка завантажує стани змінних із localStorage, якщо вони там присутні.
 // Якщо localStorage пустий, то змінні isOn та lastActionTime залишаються без змін.
 function loadState() {
-    let savedIsOn = localStorage.getItem('Status');
-    let savedLastActionTime = localStorage.getItem('lastActionTime');
-
-    if (!savedIsOn) {
-        savedIsOn = 'isOn';
-    }
-    if (!savedLastActionTime) {
-        savedLastActionTime = '';
-    }
+    let savedIsOn = localStorage.getItem('Status') || 'isOn';
+    let savedLastActionTime = localStorage.getItem('lastActionTime') || '';
 
     return {
         status: savedIsOn,
@@ -38,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const button = document.getElementById('buttonSwitch');
     const notification = document.getElementById('notification');
 
-    let buttonInfo = loadState();
+    const buttonInfo = loadState();
 
     // При завантаженні сторінки, змінюємо колір та текст залежно від значення змінної isOn
     if (buttonInfo.status === 'isOn') {
